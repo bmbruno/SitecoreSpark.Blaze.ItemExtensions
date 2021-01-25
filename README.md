@@ -26,13 +26,13 @@ Here's the view model in code:
 ``` csharp
 public class PromoViewModel
 {
-	public string Title { get; set; }
+   public string Title { get; set; }
 
-	public string Body { get; set; }
+   public string Body { get; set; }
 
-	public DateTime OfferExpires { get; set; }
+   public DateTime OfferExpires { get; set; }
 
-	public LinkField CallToAction { get; set; s}s
+   public LinkField CallToAction { get; set; s}s
 }
 ```
 
@@ -43,10 +43,10 @@ Item sourceItem = RenderingContext.Current.Rendering.Item;
 
 PromoViewModel viewModel = new PromoViewModel()
 {
-	Title = sourceItem.GetString("Title"),
-	Body = sourceItem.GetString("Body Copy"),
-	OfferExpires = sourceItem.GetDateTime("Expires"),
-	CallToAction = sourceItem.LoadGeneralLink("Call To Action Link")
+   Title = sourceItem.GetString("Title"),
+   Body = sourceItem.GetString("Body Copy"),
+   OfferExpires = sourceItem.GetDateTime("Expires"),
+   CallToAction = sourceItem.LoadGeneralLink("Call To Action Link")
 };
 ```
 

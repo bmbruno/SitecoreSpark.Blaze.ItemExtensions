@@ -1,15 +1,11 @@
-# README
+# Blaze for Sitecore - Item Extensions
 
 ## About
 
-Blaze for Sitecore - Item Extensions
+Blaze Item Extensions - as the name implies - is a set of extensions to the `Sitecore.Data.Items.Item` class that provides helper methods for loading and mapping common Sitecore field types to native C# types or common Sitecore C# types.
 
 * Current version: 0.65
 * About & Download: [Sitecore Spark - Blaze - Item Extensions](https://github.com/bmbruno/SitecoreSpark.Blaze.ItemExtensions)
-
-## Features
-
-Blaze Item Extensions - as the name implies - is a set of extensions to the `Sitecore.Data.Items.Item` class that provides helper methods for loading and mapping common Sitecore field types to native C# types or common Sitecore C# types.
 
 ## Requirements
 

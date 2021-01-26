@@ -184,7 +184,7 @@ namespace SitecoreSpark.Blaze
         {
             Assert.IsNotNullOrEmpty(fieldName, "fieldName should not be null");
 
-            return GetString(item, fieldName);           
+            return GetString(item, fieldName);
         }
 
         /// <summary>
@@ -286,6 +286,21 @@ namespace SitecoreSpark.Blaze
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Gets a Sitecore FileField object from a FIle field.
+        /// </summary>
+        /// <param name="item">Source item.</param>
+        /// <param name="fieldName">Name of the template field.</param>
+        /// <returns>Sitecore FileField type.</returns>
+        public static FileField LoadFile(this Item item, string fieldName)
+        {
+            Assert.IsNotNullOrEmpty(fieldName, "fieldName should not be null");
+
+            FileField field = item.Fields[fieldName];
+
+            return field;
         }
     }
 }

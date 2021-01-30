@@ -4,6 +4,8 @@
 
 Blaze Item Extensions - as the name implies - is a set of extensions to the `Sitecore.Data.Items.Item` class that provides helper methods for loading and mapping common Sitecore field types to native C# types or common Sitecore types.
 
+These extension methods would be handy for content-driven components that don't require Experience Editor functionality.
+
 * Current version: 0.65
 * About & Download: [Sitecore Spark - Blaze - Item Extensions](https://github.com/bmbruno/SitecoreSpark.Blaze.ItemExtensions)
 
@@ -17,7 +19,7 @@ Include the `SitecoreSpark.Blaze.ItemExtensions.cs` file in your solution and en
 
 For example, take the following component data template in Sitecore:
 
-<TODO: IMG>
+![Image of component data template.](/images/template.png)
 
 Here's the view model in code:
 
@@ -30,7 +32,7 @@ public class PromoViewModel
 
    public DateTime OfferExpires { get; set; }
 
-   public LinkField CallToAction { get; set; s}s
+   public LinkField CallToAction { get; set; }
 }
 ```
 

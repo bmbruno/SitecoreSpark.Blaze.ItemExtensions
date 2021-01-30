@@ -2,7 +2,7 @@
 
 ## About
 
-Blaze Item Extensions - as the name implies - is a set of extensions to the `Sitecore.Data.Items.Item` class that provides helper methods for loading and mapping common Sitecore field types to native C# types or common Sitecore C# types.
+Blaze Item Extensions - as the name implies - is a set of extensions to the `Sitecore.Data.Items.Item` class that provides helper methods for loading and mapping common Sitecore field types to native C# types or common Sitecore types.
 
 * Current version: 0.65
 * About & Download: [Sitecore Spark - Blaze - Item Extensions](https://github.com/bmbruno/SitecoreSpark.Blaze.ItemExtensions)
@@ -13,9 +13,7 @@ Blaze Item Extensions - as the name implies - is a set of extensions to the `Sit
 
 ## Getting Started
 
-Include the `SitecoreSpark.Blaze.ItemExtensions.cs` file in your solution and ensure it compiles with the rest of your code.
-
-Use the extensions to help map fields to your POCO models.
+Include the `SitecoreSpark.Blaze.ItemExtensions.cs` file in your solution and ensure it compiles with the rest of your code. Don't forget to add a `@using` directive to the files that need to use the extension methods.
 
 For example, take the following component data template in Sitecore:
 

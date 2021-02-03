@@ -6,7 +6,7 @@ Blaze Item Extensions - as the name implies - is a set of extensions to the `Sit
 
 These extension methods would be handy for content-driven components that don't require Experience Editor functionality.
 
-* Current version: 0.65
+* Current version: 0.95
 * About & Download: [Sitecore Spark - Blaze - Item Extensions](https://github.com/bmbruno/SitecoreSpark.Blaze.ItemExtensions)
 
 ## Requirements
@@ -43,14 +43,14 @@ Item sourceItem = RenderingContext.Current.Rendering.Item;
 
 PromoViewModel viewModel = new PromoViewModel()
 {
-   Title = sourceItem.GetString("Title"),
-   Body = sourceItem.GetString("Body Copy"),
-   OfferExpires = sourceItem.GetDateTime("Expires"),
-   CallToAction = sourceItem.LoadGeneralLink("Call To Action Link")
+   Title = sourceItem.LoadText("Title"),
+   Body = sourceItem.LoadText("Body Copy"),
+   OfferExpires = sourceItem.LoadDateTime("Offer Expires"),
+   CallToAction = sourceItem.LoadGeneralLink("Call To Action")
 };
 ```
 
-Some methods - such as `GetString()` - can be used for multiple types. The IntelliSense documentation snippets will describe which fields each method can safely load.s
+Some methods - such as `GetString()` - can be used for multiple types. The IntelliSense documentation snippets will describe which fields each method can safely load.
 
 ## Contact the Author
 

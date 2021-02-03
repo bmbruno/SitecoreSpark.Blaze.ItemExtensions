@@ -82,6 +82,9 @@ namespace SitecoreSpark.Blaze
 
             DateField field = item.Fields[fieldName];
 
+            if (field == null)
+                return DateTime.MinValue;
+
             return Sitecore.DateUtil.IsoDateToDateTime(field.Value);
         }
 
@@ -132,46 +135,18 @@ namespace SitecoreSpark.Blaze
         }
 
         /// <summary>
-        /// Gets an array of Items from the following fields types: Multilist, Checklist, Multiroot Treelist, Treelist, TreelistEx.
+        /// Gets a MultilistFIeld object from the following fields types: Multilist, Checklist, Multiroot Treelist, Treelist, TreelistEx.
         /// </summary>
         /// <param name="item">Source item.</param>
         /// <param name="fieldName">Name of the template field.</param>
-        /// <returns>Array of Sitecore items from the checklist field.</returns>
-        public static Item[] LoadMultilistItems(this Item item, string fieldName)
+        /// <returns>Multilist field type.</returns>
+        public static MultilistField LoadMultilist(this Item item, string fieldName)
         {
             Assert.IsNotNullOrEmpty(fieldName, "fieldName should not be null");
 
             MultilistField field = item.Fields[fieldName];
 
-            // TODO: see what happens when no items are in the list - what does GetItems() return?
-            if (field.Count > 0)
-                return field.GetItems();
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// Gets an array of Item IDs from the following fields types: Multilist, Checklist, Multiroot Treelist, Treelist, TreelistEx.
-        /// </summary>
-        /// <param name="item">Source item.</param>
-        /// <param name="fieldName">Name of the template field.</param>
-        /// <returns>Array of item IDs from the multilist field types.</returns>
-        public static ID[] LoadMultilistIDs(this Item item, string fieldName)
-        {
-            Assert.IsNotNullOrEmpty(fieldName, "fieldName should not be null");
-
-            MultilistField field = item.Fields[fieldName];
-
-            if (field.Count > 0)
-            {
-                Item[] items = field.GetItems();
-
-                return items.Select(u => u.ID).ToArray();
-            }
-            else
-            {
-                return null;
-            }
+            return field;
         }
 
         /// <summary>
@@ -188,7 +163,7 @@ namespace SitecoreSpark.Blaze
         }
 
         /// <summary>
-        /// Gets the string value stored in one of the following types: Droplink, Grouped Droplink, DropTree.
+        /// Gets the item stored/linked in one of the following types: Droplink, Grouped Droplink, DropTree.
         /// </summary>
         /// <param name="item">Source item.</param>
         /// <param name="fieldName">Name of the template field.</param>
@@ -206,26 +181,30 @@ namespace SitecoreSpark.Blaze
         }
 
         /// <summary>
-        /// Gets the key/value pair values from a Name Value List field.
+        /// Gets the key/value pair values from the following field types: Name Value List, Name Lookup Value List.
         /// </summary>
         /// <param name="item">Source item.</param>
         /// <param name="fieldName">Name of the template field.</param>
-        /// <returns>.NET NameValueCollection object. Empty object if field value is null.</returns>
-        public static NameValueCollection LoadNameValueList(this Item item, string fieldName)
+        /// <returns>NameValueListField field.</returns>
+        public static NameValueListField LoadNameValueList(this Item item, string fieldName)
         {
             Assert.IsNotNullOrEmpty(fieldName, "fieldName should not be null");
 
-            string rawValue = item[fieldName];
+            NameValueListField field = item.Fields[fieldName];
 
-            if (String.IsNullOrEmpty(rawValue))
-                return new NameValueCollection();
+            return field;
 
-            NameValueCollection output = Sitecore.Web.WebUtil.ParseUrlParameters(rawValue);
-            return output;
+            //string rawValue = item[fieldName];
+
+            //if (String.IsNullOrEmpty(rawValue))
+            //    return new NameValueCollection();
+
+            //NameValueCollection output = Sitecore.Web.WebUtil.ParseUrlParameters(rawValue);
+            //return output;
         }
 
         /// <summary>
-        /// Gets the key/item pair from a Name Lookup Value List field.
+        /// Gets the key/item pair values from the following field types: Name Value List, Name Lookup Value List.
         /// </summary>
         /// <param name="item">Source item.</param>
         /// <param name="fieldName">Name of the template field.</param>
@@ -233,6 +212,23 @@ namespace SitecoreSpark.Blaze
         public static Dictionary<string, Item> LoadNameLookupValueListItems(this Item item, string fieldName)
         {
             Assert.IsNotNullOrEmpty(fieldName, "fieldName should not be null");
+
+            // TODO: GET ITEMS
+
+            Dictionary<string, Item> output = new Dictionary<string, Item>();
+            NameValueListField field = item.LoadNameValueList(fieldName);
+
+            foreach (var key in field.NameValues.AllKeys)
+            {
+                Item valueItem = item.Database.GetItem(new ID(System.Web.HttpUtility.UrlDecode(field.NameValues[key])));
+
+                if (valueItem != null)
+                    output.Add(key, valueItem);
+            }
+
+            return output;
+
+            /*
 
             string rawValue = item[fieldName];
 
@@ -254,6 +250,7 @@ namespace SitecoreSpark.Blaze
             }
 
             return output;
+            */
         }
 
         /// <summary>
